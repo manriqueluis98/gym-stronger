@@ -6,7 +6,6 @@ import { Button } from "../ui/button";
 import { Carousel } from "react-responsive-carousel";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { cn } from "@/lib/utils";
 import {
   AnimationHandler,
   AnimationHandlerResponse,
@@ -177,9 +176,5 @@ export function CarouselNumbered({
 }
 
 export default function BannersCarousel({ banners }: { banners: Banner[] }) {
-  return (
-    <>
-      <CarouselNumbered banners={banners}></CarouselNumbered>
-    </>
-  );
+  return <CarouselNumbered banners={banners}></CarouselNumbered>;
 }
