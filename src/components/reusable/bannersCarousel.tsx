@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 
 import { Carousel } from "react-responsive-carousel";
 
+import { motion } from "framer-motion";
+
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import {
-  AnimationHandler,
-  AnimationHandlerResponse,
-} from "react-responsive-carousel/lib/ts/components/Carousel/types";
+
+//TODO: Make this banner from scratch without Carousel Library
 
 export type Banner = {
   bannerImageUrl: string;
@@ -37,16 +37,6 @@ export function CarouselNumbered({
   const [currentIndex, setCurrentIndex] = useState(currentSlide);
   const [isAutoPlay, setIsAutoPlay] = useState(autoPlay);
 
-  const totalBanners = banners.length;
-
-  function nextSlide() {
-    setCurrentIndex((prev) => (prev === totalBanners - 1 ? 0 : ++prev));
-  }
-
-  function prevSlide() {
-    setCurrentIndex((prev) => (prev === 0 ? totalBanners - 1 : --prev));
-  }
-
   function changeCurrentSlide(index: number) {
     if (currentIndex !== index) {
       setCurrentIndex(index);
@@ -58,63 +48,37 @@ export function CarouselNumbered({
     return index < 10 ? "0" + (index + 1).toString() : index + 1;
   }
 
-  const fadeAnimationHandler: AnimationHandler = (
-    props,
-    state
-  ): AnimationHandlerResponse => {
-    const transitionTime = props.transitionTime + "ms";
-    const transitionTimingFunction = "ease-in-out";
-
-    let slideStyle: React.CSSProperties = {
-      position: "absolute",
-      display: "block",
-      zIndex: -2,
-      minHeight: "100%",
-      opacity: 0,
-      top: 0,
-      right: 0,
-      left: 0,
-      bottom: 0,
-      scale: 2,
-      transitionTimingFunction: transitionTimingFunction,
-      msTransitionTimingFunction: transitionTimingFunction,
-      MozTransitionTimingFunction: transitionTimingFunction,
-      WebkitTransitionTimingFunction: transitionTimingFunction,
-      OTransitionTimingFunction: transitionTimingFunction,
-    };
-
-    if (!state.swiping) {
-      slideStyle = {
-        ...slideStyle,
-        scale: 1,
-        WebkitTransitionDuration: transitionTime,
-        MozTransitionDuration: transitionTime,
-        OTransitionDuration: transitionTime,
-        transitionDuration: transitionTime,
-        msTransitionDuration: transitionTime,
-      };
-    }
-
-    return {
-      slideStyle,
-      selectedStyle: { ...slideStyle, opacity: 1, position: "relative" },
-      prevStyle: { ...slideStyle },
-    };
-  };
-
   return (
     <div className="relative flex flex-col justify-center items-center min-h-[650px]">
-      <div className="carousel-content text-white font-serif uppercase italic max-w-[300px] flex flex-col items-center justify-center tracking-[0.15em] ">
-        <p className="text-md text-center font-semibold tracking-[0.3em]">
+      <motion.div
+        key={currentIndex}
+        className="carousel-content text-white font-serif uppercase italic max-w-[300px] flex flex-col items-center justify-center tracking-[0.15em] "
+      >
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-md text-center font-semibold tracking-[0.3em]"
+        >
           {banners[currentIndex].bannerSloganText}
-        </p>
-        <h3 className="text-4xl text-center font-black py-4">
+        </motion.p>
+        <motion.h3
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+          className="text-4xl text-center font-black py-4"
+        >
           <span> {banners[currentIndex].bannerTitleUpper}</span>
           <br></br>
           <span>{banners[currentIndex].bannerTitleDown}</span>
-        </h3>
+        </motion.h3>
 
-        <div className="group button-container relative mt-8">
+        <motion.div
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 1.2 }}
+          className="group button-container relative mt-8"
+        >
           <Button
             onClick={() => console.log("clicked")}
             variant={"primary"}
@@ -124,8 +88,8 @@ export function CarouselNumbered({
           </Button>
 
           <div className="button-frame top-2 left-2 -z-10 group-hover:-translate-x-1 group-hover:-translate-y-1 transition-all duration-300 absolute w-full h-full border border-white"></div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
       <div className="carousel-controls divide-x-2 absolute bottom-12 flex flex-row items-center justify-center">
         {banners.map((banner, idx) => {
           return (
@@ -135,7 +99,7 @@ export function CarouselNumbered({
               }}
               key={idx}
               className={`${
-                idx === currentIndex ? "" : "text-white/70 text-2xl"
+                idx === currentIndex ? "" : "text-white/70 text-xl"
               } carousel-number text-white text-3xl px-6 transition-all duration-200`}
             >
               {generateNumberedIndex(idx)}
@@ -146,8 +110,7 @@ export function CarouselNumbered({
       <Carousel
         infiniteLoop
         interval={7000}
-        transitionTime={2500}
-        animationHandler={fadeAnimationHandler}
+        transitionTime={0}
         swipeable={false}
         autoPlay={isAutoPlay}
         selectedItem={currentIndex}
@@ -157,16 +120,36 @@ export function CarouselNumbered({
         showArrows={false}
         showIndicators={false}
         {...props}
-        className="absolute top-0 -z-50"
+        className="absolute top-0 -z-50 flex flex-col items-center justify-center overflow-clip bg-black"
       >
         {banners.map((banner: Banner, idx: number) => {
           return (
-            <div key={idx}>
-              <img
-                className="min-h-[650px] object-cover"
+            <div
+              key={idx}
+              className={`${idx === currentIndex ? "block" : "hidden"}`}
+            >
+              <motion.img
+                initial={{
+                  scale: idx === currentIndex ? 1 : 1.1,
+                  opacity: idx === currentIndex ? 0 : 0.8,
+                }}
+                animate={{
+                  scale: idx === currentIndex ? 1.1 : 1,
+                  opacity: idx === currentIndex ? 0.8 : 0,
+                }}
+                transition={{
+                  opacity: { duration: 0.5 },
+                  scale: {
+                    delay: 1,
+                    duration: 10,
+                  },
+                }}
+                className={`min-h-[650px] w-screen  object-cover bg-no-repeat ${
+                  idx === currentIndex ? "block" : "hidden"
+                }`}
                 src={banner.bannerImageUrl}
                 alt="Gym banner image"
-              ></img>
+              ></motion.img>
             </div>
           );
         })}
