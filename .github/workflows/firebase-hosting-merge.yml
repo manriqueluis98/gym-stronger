@@ -14,6 +14,7 @@ jobs:
       - run: npm install && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
+          API_URL: '${{ secrets.API_URL }}'
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GYM_STRONGER }}'
           channelId: live
