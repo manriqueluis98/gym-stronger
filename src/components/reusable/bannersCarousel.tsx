@@ -131,11 +131,11 @@ export function CarouselNumbered({
               <motion.img
                 initial={{
                   scale: idx === currentIndex ? 1 : 1.1,
-                  opacity: idx === currentIndex ? 0 : 0.8,
+                  opacity: idx === currentIndex ? 0.3 : 0.8,
                 }}
                 animate={{
                   scale: idx === currentIndex ? 1.1 : 1,
-                  opacity: idx === currentIndex ? 0.8 : 0,
+                  opacity: idx === currentIndex ? 0.8 : 0.3,
                 }}
                 transition={{
                   opacity: { duration: 0.5 },
