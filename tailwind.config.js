@@ -27,6 +27,14 @@ module.exports = {
         "pr-black": "#060606",
         "pr-gray-dark": "#151515",
       },
+      aspectRatio: {
+        "4/3": "4 / 3",
+      },
+      screens: {
+        xl: "1024px",
+        "2xl": "1440px",
+        "3xl": "1536px",
+      },
 
       keyframes: {
         "accordion-down": {

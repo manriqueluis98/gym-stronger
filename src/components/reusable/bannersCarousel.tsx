@@ -49,16 +49,16 @@ export function CarouselNumbered({
   }
 
   return (
-    <div className="relative flex flex-col justify-center items-center min-h-[650px]">
+    <div className="relative flex flex-col justify-center items-center min-h-[650px] md:min-h-[720px]">
       <motion.div
         key={currentIndex}
-        className="carousel-content text-white font-serif uppercase italic max-w-[300px] flex flex-col items-center justify-center tracking-[0.15em] "
+        className="carousel-content xl:mb-28  text-white font-serif uppercase italic max-w-[300px] md:max-w-[90%] flex flex-col items-center justify-center tracking-[0.15em] "
       >
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-md text-center font-semibold tracking-[0.3em]"
+          className="text-md xl:my-2 2xl:text-lg  text-center font-semibold tracking-[0.3em]"
         >
           {banners[currentIndex].bannerSloganText}
         </motion.p>
@@ -66,7 +66,7 @@ export function CarouselNumbered({
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.7 }}
-          className="text-4xl text-center font-black py-4"
+          className="text-4xl text-center font-black py-4 md:text-6xl xl:text-6xl 2xl:text-7xl"
         >
           <span> {banners[currentIndex].bannerTitleUpper}</span>
           <br></br>
@@ -82,7 +82,7 @@ export function CarouselNumbered({
           <Button
             onClick={() => console.log("clicked")}
             variant={"primary"}
-            className="font-serif font-semibold "
+            className="font-serif font-semibold hover:bg-white transition-all duration-500 tracking-widest md:font-bold md:py-3 md:px-8"
           >
             {banners[currentIndex].bannerButtonText}
           </Button>
@@ -100,7 +100,7 @@ export function CarouselNumbered({
               key={idx}
               className={`${
                 idx === currentIndex ? "" : "text-white/70 text-xl"
-              } carousel-number text-white text-3xl px-6 transition-all duration-200`}
+              } carousel-number text-white font-semibold text-3xl px-6 transition-all duration-200`}
             >
               {generateNumberedIndex(idx)}
             </button>
@@ -144,7 +144,7 @@ export function CarouselNumbered({
                     duration: 10,
                   },
                 }}
-                className={`min-h-[650px] w-screen  object-cover bg-no-repeat ${
+                className={`min-h-[650px] md:min-h-[720px] w-screen  object-cover bg-no-repeat ${
                   idx === currentIndex ? "block" : "hidden"
                 }`}
                 src={banner.bannerImageUrl}
