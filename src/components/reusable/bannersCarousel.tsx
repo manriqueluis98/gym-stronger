@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
 
-/* eslint-disable @next/next/no-img-element */
 export type Banner = {
   bannerImageUrl: string;
   bannerSloganText: string;
