@@ -37,32 +37,22 @@ function ButtonFrame({ className, ...props }: ButtonFrameProps) {
 
 const itemVariants: Variants = {
   onscreen: {
-    y: 0,
-    transition: {
-      duration: 0.5,
-    },
-  },
-  offscreen: {
-    y: 200,
-  },
-};
-
-const buttonVariants: Variants = {
-  onscreen: {
     x: 0,
+    opacity: 1,
     transition: {
       duration: 0.5,
-      delay: 0.02,
     },
   },
   offscreen: {
-    x: -100,
+    opacity: 0,
+    x: -200,
   },
 };
 
 export default function MissionSection() {
   return (
     <motion.div
+      animate={false}
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ amount: 0.5 }}
@@ -82,7 +72,7 @@ export default function MissionSection() {
       </motion.p>
 
       <motion.div
-        variants={buttonVariants}
+        variants={itemVariants}
         className="group button-container relative w-fit mt-10"
       >
         <Button
