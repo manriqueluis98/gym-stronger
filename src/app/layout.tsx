@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${epilogue.variable} ${roboto.variable} ${openSans.variable} ${epilogue.className}`}
+        className={`${epilogue.variable} ${roboto.variable} ${openSans.variable} ${epilogue.className} bg-pr-black`}
       >
         {children}
       </body>

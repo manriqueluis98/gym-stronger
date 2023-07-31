@@ -1,6 +1,7 @@
 export async function getBanners() {
-  console.log(`${process.env.API_URL}/api/gym-banners?populate=*`);
-  const res = await fetch(`${process.env.API_URL}/api/gym-banners?populate=*`);
+  const res = await fetch(`${process.env.API_URL}/api/gym-banners?populate=*`, {
+    cache: "no-store",
+  });
 
   if (res.ok) {
     const bannersNormalized = await res.json().then((res) =>
@@ -14,6 +15,6 @@ export async function getBanners() {
 
     return bannersNormalized;
   } else {
-    throw new Error("Api fetch had an error");
+    console.error("API ERROR");
   }
 }
