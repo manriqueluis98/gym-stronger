@@ -21,7 +21,6 @@ export async function getGymClasses() {
     nestedAttributesRequired,
     process.env.API_URL + COLLECTION_ENDPOINT
   );
-  console.log("🚀 ~ file: gymClasses.tsx:31 ~ getGymClasses ~ route:", route);
 
   const res = await fetch(route, { next: { revalidate: 10 } });
 
