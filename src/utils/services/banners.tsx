@@ -1,6 +1,6 @@
 export async function getBanners() {
   const res = await fetch(`${process.env.API_URL}/api/gym-banners?populate=*`, {
-    cache: "no-store",
+    next: { revalidate: 10 },
   });
 
   if (res.ok) {

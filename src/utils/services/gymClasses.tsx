@@ -23,7 +23,7 @@ export async function getGymClasses() {
   );
   console.log("🚀 ~ file: gymClasses.tsx:31 ~ getGymClasses ~ route:", route);
 
-  const res = await fetch(route, { cache: "no-store" });
+  const res = await fetch(route, { next: { revalidate: 10 } });
 
   if (!res.ok) {
     console.error("Fetching data had an error with API fetch");
