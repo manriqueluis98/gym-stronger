@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 
 import { Variants, motion } from "framer-motion";
 import MissionTabs from "../reusable/missionTabs";
-import { getGymMissions } from "@/utils/services/gymMissions";
+import { getGymMissions } from "@/utils/services/apiGymMissions";
 import { useEffect, useState } from "react";
 import { GymMission } from "@/utils/types/GymMission";
 
@@ -58,7 +58,7 @@ export default function MissionSection() {
   return (
     <div
       id="section-mission"
-      className="bg-white 2xl:px-24 2xl:grid 2xl:grid-cols-2 xl:place-items-center"
+      className="bg-white 2xl:px-24 3xl:px-64 2xl:grid 2xl:grid-cols-2 xl:place-items-center "
     >
       <div className="mission-slogan">
         <motion.div
@@ -86,7 +86,7 @@ export default function MissionSection() {
             className="group button-container relative w-fit mt-10"
           >
             <Button
-              className="bg-black text-white tracking-wide md:tracking-widest py-3 px-8 group-hover:bg-white group-hover:text-pr-black group-hover:border-pr-black group-hover:border transition-all duration-300"
+              className="bg-black text-white tracking-wide md:tracking-widest py-3 px-8 group-hover:bg-white group-hover:text-pr-black group-hover:border-pr-black border transition-all duration-300"
               variant={"primary"}
             >
               {sectionData.buttonText}
@@ -100,7 +100,7 @@ export default function MissionSection() {
         <MissionTabs missions={missions} />
       </div>
 
-      <div className="mission-media md:flex md:flex-row xl:col-span-2 flex flex-col justify-center items-center gap-8 px-4 my-8 2xl:my-0">
+      <div className="mission-media 2xl:justify-between 2xl:w-full md:flex md:flex-row xl:col-span-2 flex flex-col justify-center items-center gap-8 px-4 py-8 2xl:my-0">
         <div className="media-1 ">
           <img
             src="https://res.cloudinary.com/dhfpqbwa5/image/upload/v1690825072/about_1_f34bba6cb0.avif"

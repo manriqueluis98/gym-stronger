@@ -1,4 +1,4 @@
-import { getBanners } from "@/utils/services/banners";
+import { getBanners } from "@/utils/services/apiGymBanners";
 import BannersCarousel, { Banner } from "../reusable/bannersCarousel";
 
 export default async function Hero() {

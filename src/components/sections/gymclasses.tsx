@@ -1,4 +1,4 @@
-import { getGymClasses } from "@/utils/services/gymClasses";
+import { getGymClasses } from "@/utils/services/apiGymClasses";
 import { GymClassCategory } from "@/utils/types/GymClassCategory";
 import Link from "next/link";
 

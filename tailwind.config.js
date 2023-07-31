@@ -35,6 +35,7 @@ module.exports = {
         xl: "1024px",
         "2xl": "1440px",
         "3xl": "1536px",
+        "4xl": "1800px",
       },
 
       keyframes: {

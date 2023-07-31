@@ -3,11 +3,6 @@ import { GymMission } from "@/utils/types/GymMission";
 import { useState } from "react";
 
 export default function MissionTabs({ missions }: { missions: GymMission[] }) {
-  console.log(missions);
-  console.log(
-    "🚀 ~ file: missionTabs.tsx:6 ~ MissionTabs ~ missions:",
-    missions
-  );
   const [idxSelected, setIdxSelected] = useState("0");
 
   return (
