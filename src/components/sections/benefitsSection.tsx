@@ -7,7 +7,6 @@ function BenefitUi({ benefit }: { benefit: GymBenefit }) {
     <section className="benefit  bg-pr-black text-white relative text-center py-16 mx-4 max-w-[450px] md:max-w-[380px]">
       <div className="positioner absolute w-full h-full flex flex-col justify-start items-center -top-4">
         <div className="wrapper ">
-          {/* TODO: Rotate background */}
           <div className="icon-wrapper bg-pr-primary -skew-x-12 w-fit p-4">
             <img
               src={benefit.iconUrl}
@@ -34,7 +33,7 @@ function BenefitUi({ benefit }: { benefit: GymBenefit }) {
         <h4 className="text-white font-bold tracking-widest text-xl uppercase py-2">
           {benefit.title}
         </h4>
-        <p className="text-pr-gray-text text-sm tracking-wide font-light pt-2">
+        <p className="text-pr-gray-text text-sm  tracking-wide font-light pt-2">
           {benefit.description}
         </p>
       </div>

@@ -3,8 +3,10 @@ import { cn } from "@/lib/utils";
 //UI Line which is under the section title (gray and yellow)
 export function SectionUnderlineUi({
   variant = "left",
+  className,
 }: {
   variant?: "left" | "center" | "right";
+  className?: string;
 }) {
   const variantCn = {
     left: "",
@@ -17,7 +19,7 @@ export function SectionUnderlineUi({
   const yellowLineCn = cn(variantCn[variant], defaultCn);
 
   return (
-    <div className="section-underline relative w-[50%] my-4">
+    <div className={cn("section-underline relative w-[50%] my-4", className)}>
       <div className="line h-[1px] w-full bg-gray-300"></div>
       <div className={yellowLineCn}></div>
     </div>
@@ -51,9 +53,7 @@ export function SectionTitleUi({
       <h3 className="text-3xl uppercase font-extrabold tracking-wide md:text-4xl xl:text-4xl">
         {title}
       </h3>
-      <p className="text-gray-600  font-light py-2 md:max-w-[500px]">
-        {description}
-      </p>
+      <p className="font-light py-2 md:max-w-[500px]">{description}</p>
 
       {isUnderline && <SectionUnderlineUi variant={underlinePosition} />}
     </div>

@@ -10,11 +10,11 @@ export default async function GymClassesSection() {
   return (
     <section
       id="section-gym-classes"
-      className="space-y-8 py-4 my-12 md:grid 
+      className="bg-pr-black space-y-8  py-12 md:grid 
       md:grid-cols-2 md:space-y-0  md:place-items-center md:gap-4 md:mx-4 
       lg:mx-12 2xl:grid-cols-4 2xl:place-items-start 2xl:divide-x 
       2xl:space-x-0 2xl:space-y-0 2xl:gap-0
-      3xl:my-36"
+      3xl:py-24"
     >
       {gymClasses.map((gymClass) => {
         return (
@@ -32,7 +32,7 @@ export default async function GymClassesSection() {
             <h3 className="text-xl uppercase font-bold">
               {gymClass.categoryName}
             </h3>
-            <p className="text-sm text-pr-gray-text leading-relaxed">
+            <p className="text-sm text-pr-gray-text font-sans leading-relaxed">
               {gymClass.categoryDescription}
             </p>
 

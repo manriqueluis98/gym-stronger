@@ -76,7 +76,7 @@ export default function MissionSection() {
           </motion.h3>
           <motion.p
             variants={itemVariants}
-            className="text-gray-950/70 md:leading-relaxed"
+            className="text-gray-950/70 md:leading-relaxed font-sans"
           >
             {sectionData.description}
           </motion.p>

@@ -1,5 +1,7 @@
 import BenefitsSection from "@/components/sections/benefitsSection";
 import GymFaqSection from "@/components/sections/faqSection";
+import GymChooseUsSection from "@/components/sections/gymChooseUsSection";
+import GymClientsSection from "@/components/sections/gymClientsSection";
 import GymSkillsSection from "@/components/sections/gymSkillsSection";
 import GymClasses from "@/components/sections/gymclasses";
 import Hero from "@/components/sections/hero";
@@ -9,7 +11,9 @@ export default function Home() {
   return (
     <main className="">
       <Hero></Hero>
-      <GymClasses />
+      <div className="bg-wrapper bg-pr-black">
+        <GymClasses />
+      </div>
       <MissionSection />
       <BenefitsSection />
 
@@ -17,6 +21,10 @@ export default function Home() {
         <GymSkillsSection className="py-4 2xl:px-12 " />
         <GymFaqSection className="py-4 2xl:px-12 " />
       </div>
+
+      <GymChooseUsSection />
+
+      <GymClientsSection />
     </main>
   );
 }
