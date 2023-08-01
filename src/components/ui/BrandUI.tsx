@@ -48,12 +48,47 @@ export function SectionTitleUi({
         className
       )}
     >
-      <h3 className="text-3xl uppercase font-extrabold tracking-wide">
+      <h3 className="text-3xl uppercase font-extrabold tracking-wide md:text-4xl xl:text-4xl">
         {title}
       </h3>
-      <p className="text-gray-600  font-light py-2">{description}</p>
+      <p className="text-gray-600  font-light py-2 md:max-w-[500px]">
+        {description}
+      </p>
 
       {isUnderline && <SectionUnderlineUi variant={underlinePosition} />}
+    </div>
+  );
+}
+
+export function GymProgressBarUI({
+  skillName,
+  percentage,
+  className,
+}: {
+  skillName: string;
+  percentage: number;
+  className?: string;
+}) {
+  return (
+    <div className="progress-bar relative mx-4">
+      <div className="bar-title py-1">
+        <p className="font-bold tracking-wider uppercase xl:text-lg">
+          {skillName}
+        </p>
+      </div>
+      <div className="bar-wrapper border rounded-sm w-full p-2">
+        <div
+          className={`bar-line h-[8px] xl:h-[10px] bg-pr-black w-[${percentage.toString()}%]`}
+        ></div>
+      </div>
+
+      <div className="bar-percentage">
+        <div className="bar-number">
+          <p className="text-white font-roboto bg-pr-black py-1 px-2 w-fit absolute top-1 right-0 text-xs">
+            {percentage}%
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

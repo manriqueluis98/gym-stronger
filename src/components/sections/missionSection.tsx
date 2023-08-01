@@ -56,7 +56,7 @@ export default function MissionSection() {
   }, []);
 
   return (
-    <div
+    <section
       id="section-mission"
       className="bg-white 2xl:px-24 3xl:px-64 2xl:grid 2xl:grid-cols-2 xl:place-items-center "
     >
@@ -126,6 +126,6 @@ export default function MissionSection() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 
 function BenefitUi({ benefit }: { benefit: GymBenefit }) {
   return (
-    <div className="benefit  bg-pr-black text-white relative text-center py-16 mx-4 max-w-[450px] md:max-w-[380px]">
+    <section className="benefit  bg-pr-black text-white relative text-center py-16 mx-4 max-w-[450px] md:max-w-[380px]">
       <div className="positioner absolute w-full h-full flex flex-col justify-start items-center -top-4">
         <div className="wrapper ">
           {/* TODO: Rotate background */}
@@ -38,7 +38,7 @@ function BenefitUi({ benefit }: { benefit: GymBenefit }) {
           {benefit.description}
         </p>
       </div>
-    </div>
+    </section>
   );
 }
 

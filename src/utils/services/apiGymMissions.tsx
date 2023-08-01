@@ -13,12 +13,6 @@ export async function getGymMissions() {
     [],
     API_URL + COLLECTION_ENDPOINT
   );
-  console.log(
-    "🚀 ~ file: gymMissions.tsx:13 ~ getGymMissions ~ process.env.API_URL:",
-    API_URL
-  );
-
-  console.log("🚀 ~ file: gymMissions.tsx:14 ~ getGymMissions ~ route:", route);
 
   const res = await fetch(route, { next: { revalidate: 10 } });
 

@@ -8,7 +8,7 @@ export default async function GymClassesSection() {
   );
 
   return (
-    <div
+    <section
       id="section-gym-classes"
       className="space-y-8 py-4 my-12 md:grid 
       md:grid-cols-2 md:space-y-0  md:place-items-center md:gap-4 md:mx-4 
@@ -45,6 +45,6 @@ export default async function GymClassesSection() {
           </div>
         );
       })}
-    </div>
+    </section>
   );
 }
