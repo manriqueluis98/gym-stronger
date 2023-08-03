@@ -34,7 +34,10 @@ export default async function GymChooseUsSection() {
     "https://res.cloudinary.com/dhfpqbwa5/image/upload/v1690908619/about_3_b09d643bf5.avif";
 
   return (
-    <section id="section-choose" className="relative xl:mb-32">
+    <section
+      id="section-choose"
+      className="relative xl:pb-32 bg-pr-gray-content"
+    >
       <div
         style={{ backgroundImage: `url('${bgUrl}')` }}
         className="reasons-container  text-white text-center bg-center bg-cover mt-16"
@@ -59,8 +62,8 @@ export default async function GymChooseUsSection() {
         </div>
       </div>
 
-      <div className="stats-absolute xl:flex xl:flex-row xl:items-center xl:justify-center xl:w-full 2xl:absolute 2xl:-bottom-20 2xl:w-full 2xl:flex 2xl:flex-col 2xl:items-center 2xl:justify-center">
-        <div className="stats-container max-w-[1024px] 2xl:py-8 2xl:px-20 2xl:shadow-lg bg-white flex flex-col items-center md:place-items-centerp text-center gap-8 py-12 md:grid md:grid-cols-2 xl:grid-cols-4 xl:gap-16">
+      <div className="stats-absolute  xl:flex xl:flex-row xl:items-center xl:justify-center xl:w-full 2xl:absolute 2xl:bottom-10 2xl:w-full 2xl:flex 2xl:flex-col 2xl:items-center 2xl:justify-center">
+        <div className="stats-container drop-shadow-md  max-w-[1024px] 2xl:py-8 2xl:px-20 2xl:shadow-lg bg-white flex flex-col items-center md:place-items-centerp text-center gap-8 py-12 md:grid md:grid-cols-2 xl:grid-cols-4 xl:gap-16">
           {stats.map((stat, idx) => {
             return (
               <div key={idx} className="stat-container 2xl:space-y-2">

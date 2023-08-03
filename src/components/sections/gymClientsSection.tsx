@@ -6,94 +6,101 @@ import {
 } from "@/utils/services/apiGymClientsTestimonials";
 
 import "./gymClientsSection.css";
-import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import { cn } from "@/lib/utils";
 
 export default function GymClientsSection() {
   const [testimonials, setTestimonials] = useState<GymClientTestimonial[]>([]);
-  const testimonialRefs = useRef<HTMLDivElement[]>([]);
-  const sliderContainerRef = useRef<HTMLDivElement>(null);
 
-  const [testimonialSelected, setTestimonialSelected] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const [itemWidth, setItemWidth] = useState(window.innerWidth - 32);
+
+  const [selectedIdx, setSelectedIdx] = useState(0);
 
   useEffect(() => {
     async function fetchData() {
+      setLoading(true);
       const data = await getTestimonials();
-
       setTestimonials(data);
+      setLoading(false);
     }
 
     fetchData();
   }, []);
 
-  //UseEffect for Client Testimonial Slides, uses IntersectionObserver compared to the wrapper with a threshold of 0.5
-  //It means when the a different slides intersects the viewport with at least 50% its gonna change the index
-  //of the Slide Selected for the navigation squares. This combined with the snap-x snap mandatory makes the slides
-  //feel interactive and related as touchscreen in PC and Mobile.
   useEffect(() => {
-    function handleIntersection(entries: IntersectionObserverEntry[]) {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // Get the index of the visible slide
-          const index = parseInt(entry.target.id.split("-")[1], 10);
-          setTestimonialSelected(index);
-        }
-      });
-    }
-    if (sliderContainerRef.current) {
-      // Function to handle intersection changes
+    const handleResize = () => [setItemWidth(window.innerWidth - 32)];
 
-      // Create the Intersection Observer
-      const observer = new IntersectionObserver(handleIntersection, {
-        root: sliderContainerRef.current,
-        threshold: 0.5, // Customize the threshold as per your requirement
-      });
+    window.addEventListener("resize", handleResize);
 
-      // Observe each slide
-      const slides = testimonialRefs.current;
-      slides.forEach((slide) => {
-        observer.observe(slide);
-      });
-
-      // Clean up: disconnect the observer when the component unmounts
-      return () => {
-        observer.disconnect();
-      };
-    }
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
-  function handleNavigationSlider(idx: any) {
-    if (testimonialRefs.current[idx]) {
-      testimonialRefs.current[idx].scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
+  if (loading) return <h1>loading</h1>;
 
-    setTestimonialSelected(idx);
+  function PaginationControls({ className }: { className: string }) {
+    const swiper = useSwiper();
+
+    return (
+      <div className={cn(`controls flex gap-3 my-6`, className)}>
+        {testimonials.map((item, idx) => {
+          return (
+            <div
+              key={idx}
+              className={`control-wrapper p-[3px] border transition-all duration-500 ${
+                idx === selectedIdx
+                  ? "border border-pr-black"
+                  : "border-transparent"
+              }`}
+              onClick={() => {
+                swiper.slideTo(idx);
+                setSelectedIdx(idx);
+              }}
+            >
+              <div
+                className={`${
+                  idx === selectedIdx ? "bg-pr-black" : "bg-gray-500"
+                } w-2 h-2`}
+              ></div>
+            </div>
+          );
+        })}
+      </div>
+    );
   }
 
   return (
     <section
       id="section-clients"
-      className="text-pr-black flex flex-col items-center justify-center"
+      className="text-pr-black px-2 md:px-4 py-24 2xl:py-12 bg-pr-gray-content"
     >
-      <div className="slider-container px-4">
-        <div
-          className="slider-wrapper grid grid-flow-col auto-cols-[100%] scroll-smooth overflow-x-scroll snap-x snap-mandatory"
-          ref={sliderContainerRef}
-        >
-          {testimonials.map((testimonial, idx) => {
-            return (
+      <Swiper
+        style={{ width: `${Math.min(1024, itemWidth)}px` }}
+        onSlideChange={(swiper) => {
+          setSelectedIdx(swiper.activeIndex);
+        }}
+        centeredSlides={true}
+        className="mySwiper"
+      >
+        {testimonials.map((testimonial, idx) => {
+          return (
+            <SwiperSlide key={idx}>
               <div
                 id={`testimonial-${idx}`}
                 key={testimonial.id}
-                className="testimonial snap-start"
-                ref={(ref) =>
-                  (testimonialRefs.current[idx] = ref as HTMLDivElement)
-                }
+                style={{ width: `${Math.min(1024, itemWidth)}px` }}
+                className={`testimonial flex flex-col gap-4 md:flex-row md:gap-6`}
               >
-                <div className="testimonial-image my-4">
+                <div className="testimonial-image  ">
                   <img
                     src={testimonial.photoUrl}
                     alt="client photo"
@@ -101,8 +108,8 @@ export default function GymClientsSection() {
                     className="min-w-[100px]"
                   />
                 </div>
-                <div className="testimonial-content flex flex-col">
-                  <div className="testimonial-client my-4">
+                <div className="testimonial-content flex flex-col gap-4">
+                  <div className="testimonial-client">
                     <p className="uppercase italic text-gray-500 tracking-wider">
                       {testimonial.feature}
                     </p>
@@ -111,42 +118,20 @@ export default function GymClientsSection() {
                     </p>
                   </div>
 
-                  <p className="h[400px] italic text-pr-black font-sans font-semibold">
+                  <p
+                    style={{ maxWidth: `${Math.min(1024, itemWidth)}px` }}
+                    className=" italic text-pr-black font-sans font-semibold leading-loose tracking-wide"
+                  >
                     {testimonial.testimonial}
                   </p>
                 </div>
               </div>
-            );
-          })}
-        </div>
-      </div>
-
-      <div className="slider-navigation flex flex-row px-6 my-8 w-full justify-start gap-4">
-        {testimonials.map((item, idx) => {
-          return (
-            <Link
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavigationSlider(idx);
-              }}
-              key={idx}
-              href={`#testimonial-${idx}`}
-              className={`p-[2px] ${
-                testimonialSelected === idx
-                  ? "border border-pr-black"
-                  : "border-none"
-              }`}
-              //   className="p-[2px] border border-pr-black"
-            >
-              <div
-                className={`square w-[8px] h-[8px] ${
-                  testimonialSelected === idx ? "bg-pr-black" : "bg-gray-600"
-                }`}
-              ></div>
-            </Link>
+            </SwiperSlide>
           );
         })}
-      </div>
+
+        <PaginationControls className="md:ml-[124px]" />
+      </Swiper>
     </section>
   );
 }

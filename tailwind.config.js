@@ -27,6 +27,7 @@ module.exports = {
         "pr-black": "#060606",
         "pr-gray-dark": "#151515",
         "pr-gray-text": "#BCBCBC",
+        "pr-gray-content": "#F2F2F2",
       },
       aspectRatio: {
         "4/3": "4 / 3",
