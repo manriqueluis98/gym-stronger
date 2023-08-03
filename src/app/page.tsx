@@ -2,6 +2,7 @@ import BenefitsSection from "@/components/sections/benefitsSection";
 import GymFaqSection from "@/components/sections/faqSection";
 import GymChooseUsSection from "@/components/sections/gymChooseUsSection";
 import GymClientsSection from "@/components/sections/gymClientsSection";
+import GymCoachesSection from "@/components/sections/gymCoachesSection";
 import GymSkillsSection from "@/components/sections/gymSkillsSection";
 import GymClasses from "@/components/sections/gymclasses";
 import Hero from "@/components/sections/hero";
@@ -25,6 +26,8 @@ export default function Home() {
       <GymChooseUsSection />
 
       <GymClientsSection />
+
+      <GymCoachesSection />
     </main>
   );
 }
