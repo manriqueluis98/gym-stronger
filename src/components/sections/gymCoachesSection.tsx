@@ -67,7 +67,7 @@ const GymCoachesSection: React.FC<GymCoachesSectionProps> = () => {
   }, []);
 
   return (
-    <section id="section-coaches" className="px-2">
+    <section id="section-coaches" className="px-2 lg:px-48 2xl:px-64 3xl:px-80">
       <SectionTitleUi
         title={title}
         description={description}
@@ -77,9 +77,16 @@ const GymCoachesSection: React.FC<GymCoachesSectionProps> = () => {
       ></SectionTitleUi>
 
       <Swiper
-        slidesPerView={3}
-        grid={{ fill: "row", rows: 2 }}
-        modules={[Grid]}
+        breakpoints={{
+          800: {
+            slidesPerView: 2,
+          },
+          1200: {
+            slidesPerView: 3,
+          },
+        }}
+        spaceBetween={32}
+        slidesPerView={1}
       >
         {coachs.map((gymCoach, idx) => {
           return (
@@ -114,9 +121,12 @@ const GymCoachesSection: React.FC<GymCoachesSectionProps> = () => {
                         return (
                           <div
                             key={idx}
-                            className="social-wrapper bg-pr-black p-2"
+                            className="social-wrapper bg-pr-black p-2 group/icon hover:bg-pr-primary hover:text-pr-black"
                           >
-                            <SocialIcon social={social} />
+                            <SocialIcon
+                              social={social}
+                              className="group-hover/icon:text-pr-black"
+                            />
                           </div>
                         );
                       })}
