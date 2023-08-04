@@ -56,7 +56,7 @@ export default function GymClientsSection() {
           return (
             <div
               key={idx}
-              className={`control-wrapper p-[3px] border transition-all duration-500 ${
+              className={`control-wrapper p-[3px] cursor-pointer border transition-all duration-500 ${
                 idx === selectedIdx
                   ? "border border-pr-black"
                   : "border-transparent"

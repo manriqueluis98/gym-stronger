@@ -18,8 +18,9 @@ import {
 } from "react-icons/fa";
 
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
-import { Grid } from "swiper/modules";
+import useMeasure from "react-use-measure";
 
 interface GymCoachesSectionProps {}
 
@@ -29,6 +30,8 @@ const GymCoachesSection: React.FC<GymCoachesSectionProps> = () => {
   const title = "Team of Expert Coaches";
 
   const [coachs, setCoachs] = useState<GymCoachResume[]>([]);
+
+  const [selectedIdx, setSelectedIdx] = useState(0);
 
   function SocialIcon({
     social,
@@ -66,6 +69,36 @@ const GymCoachesSection: React.FC<GymCoachesSectionProps> = () => {
     fetchData();
   }, []);
 
+  function SwiperNavigation() {
+    const swiper = useSwiper();
+
+    return (
+      <div className="navigation-wrapper flex justify-center gap-4 py-4 2xl:py-8 ">
+        {coachs.map((coach, idx) => {
+          if (window.innerWidth >= 800 && idx >= coachs.length - 1) return;
+          if (window.innerWidth >= 1200 && idx === coachs.length - 2) return;
+          return (
+            <div
+              onClick={() => {
+                swiper.slideTo(idx);
+              }}
+              key={idx}
+              className={`control-wrapper p-1 border cursor-pointer ${
+                selectedIdx === idx ? "border-pr-black" : "border-transparent"
+              }`}
+            >
+              <div
+                className={`control w-2 h-2 ${
+                  selectedIdx === idx ? "bg-pr-black" : "bg-gray-400"
+                }`}
+              ></div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
   return (
     <section id="section-coaches" className="px-2 lg:px-48 2xl:px-64 3xl:px-80">
       <SectionTitleUi
@@ -77,6 +110,9 @@ const GymCoachesSection: React.FC<GymCoachesSectionProps> = () => {
       ></SectionTitleUi>
 
       <Swiper
+        onBreakpoint={(swiper, swiperOptions) => {
+          console.log(swiper);
+        }}
         breakpoints={{
           800: {
             slidesPerView: 2,
@@ -87,6 +123,9 @@ const GymCoachesSection: React.FC<GymCoachesSectionProps> = () => {
         }}
         spaceBetween={32}
         slidesPerView={1}
+        onSlideChange={(swiper) => {
+          setSelectedIdx(swiper.activeIndex);
+        }}
       >
         {coachs.map((gymCoach, idx) => {
           return (
@@ -119,15 +158,18 @@ const GymCoachesSection: React.FC<GymCoachesSectionProps> = () => {
                     >
                       {Object.keys(gymCoach.socials).map((social, idx) => {
                         return (
-                          <div
+                          <Link
                             key={idx}
-                            className="social-wrapper bg-pr-black p-2 group/icon hover:bg-pr-primary hover:text-pr-black"
+                            href={gymCoach.socials[social]}
+                            target="_blank"
                           >
-                            <SocialIcon
-                              social={social}
-                              className="group-hover/icon:text-pr-black"
-                            />
-                          </div>
+                            <div className="social-wrapper bg-pr-black p-2 group/icon hover:bg-pr-primary hover:text-pr-black">
+                              <SocialIcon
+                                social={social}
+                                className="group-hover/icon:text-pr-black"
+                              />
+                            </div>
+                          </Link>
                         );
                       })}
                     </div>
@@ -137,6 +179,8 @@ const GymCoachesSection: React.FC<GymCoachesSectionProps> = () => {
             </SwiperSlide>
           );
         })}
+
+        <SwiperNavigation />
       </Swiper>
     </section>
   );

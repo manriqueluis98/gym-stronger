@@ -7,7 +7,7 @@ export interface GymCoachResume {
   id: number;
   name: string;
   position: string;
-  socials: Object;
+  socials: { [key: string]: string };
   photoUrl: string;
 }
 
