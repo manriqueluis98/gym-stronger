@@ -1,5 +1,6 @@
 import BenefitsSection from "@/components/sections/benefitsSection";
 import GymFaqSection from "@/components/sections/faqSection";
+import GymStrongBannerSection from "@/components/sections/gymBannerStrong";
 import GymChooseUsSection from "@/components/sections/gymChooseUsSection";
 import GymClientsSection from "@/components/sections/gymClientsSection";
 import GymCoachesSection from "@/components/sections/gymCoachesSection";
@@ -28,6 +29,8 @@ export default function Home() {
       <GymClientsSection />
 
       <GymCoachesSection />
+
+      <GymStrongBannerSection />
     </main>
   );
 }

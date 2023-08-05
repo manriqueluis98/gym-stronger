@@ -1,4 +1,8 @@
+"use client";
+
 import { cn } from "@/lib/utils";
+import { Button } from "./button";
+import useMeasure from "react-use-measure";
 
 //UI Line which is under the section title (gray and yellow)
 export function SectionUnderlineUi({
@@ -89,6 +93,32 @@ export function GymProgressBarUI({
           </p>
         </div>
       </div>
+    </div>
+  );
+}
+
+export function GymButtonStroked({
+  children,
+  variant,
+}: {
+  children: string;
+  variant?: "primary" | "dark";
+}) {
+  const [buttonRef, buttonBounds] = useMeasure();
+  return (
+    <div
+      className="button-container relative group"
+      style={{ width: buttonBounds.width, height: buttonBounds.height }}
+    >
+      <Button
+        ref={buttonRef}
+        variant={"primary"}
+        className="font-semibold tracking-wider py-3 px-8 absolute z-20 whitespace-nowrap group-hover:bg-white border border-transparent transition-all duration-300"
+      >
+        {children}
+      </Button>
+
+      <div className="button-frame top-2 left-2 z-10 group-hover:-translate-x-1 group-hover:-translate-y-1 transition-all duration-300 absolute w-full h-full border border-white"></div>
     </div>
   );
 }
