@@ -14,15 +14,16 @@ import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { cn } from "@/lib/utils";
+import useMeasure from "react-use-measure";
 
 export default function GymClientsSection() {
   const [testimonials, setTestimonials] = useState<GymClientTestimonial[]>([]);
 
   const [loading, setLoading] = useState(false);
 
-  const [itemWidth, setItemWidth] = useState(1024);
-
   const [selectedIdx, setSelectedIdx] = useState(0);
+
+  const [sectionRef, sectionBounds] = useMeasure();
 
   useEffect(() => {
     async function fetchData() {
@@ -35,15 +36,17 @@ export default function GymClientsSection() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const handleResize = () => [setItemWidth(window.innerWidth - 32)];
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setItemWidth(bounds.width - 32);
+  //   };
 
-    window.addEventListener("resize", handleResize);
+  //   window.addEventListener("resize", handleResize);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
 
   if (loading) return <h1>loading</h1>;
 
@@ -82,9 +85,10 @@ export default function GymClientsSection() {
     <section
       id="section-clients"
       className="text-pr-black px-2 md:px-4 py-24 2xl:py-12 bg-pr-gray-content"
+      ref={sectionRef}
     >
       <Swiper
-        style={{ width: `${Math.min(1024, itemWidth)}px` }}
+        style={{ width: `${Math.min(1024, sectionBounds.width - 32)}px` }}
         onSlideChange={(swiper) => {
           setSelectedIdx(swiper.activeIndex);
         }}
@@ -97,7 +101,9 @@ export default function GymClientsSection() {
               <div
                 id={`testimonial-${idx}`}
                 key={testimonial.id}
-                style={{ width: `${Math.min(1024, itemWidth)}px` }}
+                style={{
+                  width: `${Math.min(1024, sectionBounds.width - 32)}px`,
+                }}
                 className={`testimonial flex flex-col gap-4 md:flex-row md:gap-6`}
               >
                 <div className="testimonial-image  ">
@@ -119,7 +125,9 @@ export default function GymClientsSection() {
                   </div>
 
                   <p
-                    style={{ maxWidth: `${Math.min(1024, itemWidth)}px` }}
+                    style={{
+                      maxWidth: `${Math.min(1024, sectionBounds.width - 32)}px`,
+                    }}
                     className=" italic text-pr-black font-sans font-semibold leading-loose tracking-wide"
                   >
                     {testimonial.testimonial}
