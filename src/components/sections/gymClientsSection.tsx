@@ -20,7 +20,7 @@ export default function GymClientsSection() {
 
   const [loading, setLoading] = useState(false);
 
-  const [itemWidth, setItemWidth] = useState(window.innerWidth - 32);
+  const [itemWidth, setItemWidth] = useState(1024);
 
   const [selectedIdx, setSelectedIdx] = useState(0);
 
