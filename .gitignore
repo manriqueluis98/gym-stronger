@@ -39,3 +39,6 @@ next-env.d.ts
 **/.firebaserc
 
 .firebaserc
+
+.env
+.env.local
