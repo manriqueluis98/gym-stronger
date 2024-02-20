@@ -24,12 +24,10 @@ import useMeasure from "react-use-measure";
 
 interface GymCoachesSectionProps {}
 
-const GymCoachesSection: React.FC<GymCoachesSectionProps> = () => {
+const GymCoachesSection = ({ coachs }: { coachs: GymCoachResume[] }) => {
   const description =
     "Transform Your Fitness Journey: Join Our Expert Coaching Section at Stronger Gym. Reach Your Goals, Maximize Potential, and Elevate Your Performance!";
   const title = "Team of Expert Coaches";
-
-  const [coachs, setCoachs] = useState<GymCoachResume[]>([]);
 
   const [selectedIdx, setSelectedIdx] = useState(0);
 
@@ -58,16 +56,6 @@ const GymCoachesSection: React.FC<GymCoachesSectionProps> = () => {
         break;
     }
   }
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await getGymCoachesResume();
-
-      setCoachs(data);
-    }
-
-    fetchData();
-  }, []);
 
   function SwiperNavigation() {
     const swiper = useSwiper();

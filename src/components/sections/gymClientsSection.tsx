@@ -16,25 +16,16 @@ import "swiper/css/pagination";
 import { cn } from "@/lib/utils";
 import useMeasure from "react-use-measure";
 
-export default function GymClientsSection() {
-  const [testimonials, setTestimonials] = useState<GymClientTestimonial[]>([]);
-
+export default function GymClientsSection({
+  testimonials,
+}: {
+  testimonials: GymClientTestimonial[];
+}) {
   const [loading, setLoading] = useState(false);
 
   const [selectedIdx, setSelectedIdx] = useState(0);
 
   const [sectionRef, sectionBounds] = useMeasure();
-
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      const data = await getTestimonials();
-      setTestimonials(data);
-      setLoading(false);
-    }
-
-    fetchData();
-  }, []);
 
   // useEffect(() => {
   //   const handleResize = () => {

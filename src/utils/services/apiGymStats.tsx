@@ -9,7 +9,12 @@ export interface GymStatUI {
 }
 
 export async function getGymStats() {
-  const res = await fetch(API_URL + ENDPOINT, { next: { revalidate: 10 } });
+  const res = await fetch(API_URL + ENDPOINT, {
+    headers: {
+      Authorization: `Bearer ${process.env.API_TOKEN}`,
+    },
+    next: { revalidate: 10 },
+  });
 
   if (!res.ok) {
     console.error("API ERROR Gym Stats");

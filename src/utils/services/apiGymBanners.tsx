@@ -1,5 +1,8 @@
 export async function getBanners() {
   const res = await fetch(`${process.env.API_URL}/api/gym-banners?populate=*`, {
+    headers: {
+      Authorization: `Bearer ${process.env.API_TOKEN}`,
+    },
     next: { revalidate: 10 },
   });
 

@@ -42,19 +42,11 @@ const itemVariants: Variants = {
   },
 };
 
-export default function MissionSection() {
-  const [missions, setMissions] = useState<GymMission[]>([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const data: GymMission[] = await getGymMissions();
-
-      setMissions(data);
-    }
-
-    fetchData();
-  }, []);
-
+export default function MissionSection({
+  missions,
+}: {
+  missions: GymMission[];
+}) {
   return (
     <section
       id="section-mission"

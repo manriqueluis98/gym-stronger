@@ -4,7 +4,12 @@ const END_POINT =
 const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
 
 export async function getGymFAQs() {
-  const res = await fetch(API_URL + END_POINT, { next: { revalidate: 10 } });
+  const res = await fetch(API_URL + END_POINT, {
+    headers: {
+      Authorization: `Bearer ${process.env.API_TOKEN}`,
+    },
+    next: { revalidate: 10 },
+  });
 
   if (!res.ok) {
     console.error("The gym FAQs api fetch failed");
