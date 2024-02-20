@@ -63,8 +63,11 @@ const GymCoachesSection = ({ coachs }: { coachs: GymCoachResume[] }) => {
     return (
       <div className="navigation-wrapper flex justify-center gap-4 py-4 2xl:py-8 ">
         {coachs.map((coach, idx) => {
-          if (window.innerWidth >= 800 && idx >= coachs.length - 1) return;
-          if (window.innerWidth >= 1200 && idx === coachs.length - 2) return;
+          // if (window) {
+          //   if (window.innerWidth >= 800 && idx >= coachs.length - 1) return;
+          //   if (window.innerWidth >= 1200 && idx === coachs.length - 2) return;
+          // }
+
           return (
             <div
               onClick={() => {
