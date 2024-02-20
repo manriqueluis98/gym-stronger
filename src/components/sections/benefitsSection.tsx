@@ -43,10 +43,6 @@ function BenefitUi({ benefit }: { benefit: GymBenefit }) {
 
 export default async function BenefitsSection() {
   const benefits = await getGymBenefits();
-  console.log(
-    "🚀 ~ file: benefitsSection.tsx:5 ~ BenefitsSection ~ benefits:",
-    benefits
-  );
 
   return (
     <div id="section-benefits" className="bg-white py-12 ">

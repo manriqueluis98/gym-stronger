@@ -22,7 +22,12 @@ export async function getGymClasses() {
     process.env.API_URL + COLLECTION_ENDPOINT
   );
 
-  const res = await fetch(route, { next: { revalidate: 1 } });
+  const res = await fetch(route, {
+    headers: {
+      Authorization: `Bearer ${process.env.API_TOKEN}`,
+    },
+    next: { revalidate: 1 },
+  });
 
   if (!res.ok) {
     console.error("Fetching data had an error with API fetch");

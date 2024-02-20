@@ -14,9 +14,16 @@ export async function getGymMissions() {
     API_URL + COLLECTION_ENDPOINT
   );
 
-  const res = await fetch(route, { next: { revalidate: 10 } });
+  const res = await fetch(route, {
+    headers: {
+      Authorization: `Bearer ${process.env.API_TOKEN}`,
+    },
+    next: { revalidate: 10 },
+  });
+  console.log("🚀 ~ getGymMissions ~ route:", route);
 
   const resData = await res.json().then((res) => res.data);
+  console.log("🚀 ~ getGymMissions ~ resData:", resData);
 
   const gymMissions: GymMission[] = resData.map((obj: any) => {
     return {

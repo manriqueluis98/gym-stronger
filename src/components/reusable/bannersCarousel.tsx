@@ -48,6 +48,8 @@ export function CarouselNumbered({
     return index < 10 ? "0" + (index + 1).toString() : index + 1;
   }
 
+  if (!banners[currentIndex]) return null;
+
   return (
     <div className="relative flex flex-col justify-center items-center min-h-[650px] md:min-h-[720px]">
       <motion.div

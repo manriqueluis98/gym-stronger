@@ -12,21 +12,10 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-export default function FaqTabs() {
-  const [gymFAQs, setGymFAQs] = useState<GymFAQ[]>([]);
-
+export default function FaqTabs({ gymFAQs }: { gymFAQs: GymFAQ[] }) {
   const [accordionValue, setAccordionValue] = useState("0");
 
   const selectedCns = "bg-pr-black text-white";
-
-  useEffect(() => {
-    async function fetchData() {
-      const FAQs = await getGymFAQs();
-      setGymFAQs(FAQs);
-    }
-
-    fetchData();
-  }, []);
 
   return (
     <>

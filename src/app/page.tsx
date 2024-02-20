@@ -1,3 +1,6 @@
+import FetcherGymClientsSection from "@/components/sections/FetcherGymClientsSection";
+import FetcherGymCoachesSection from "@/components/sections/FetcherGymCoachesSection";
+import FetcherGymMissionsSection from "@/components/sections/FetcherGymMissionsSection";
 import BenefitsSection from "@/components/sections/benefitsSection";
 import GymFaqSection from "@/components/sections/faqSection";
 import GymStrongBannerSection from "@/components/sections/gymBannerStrong";
@@ -16,7 +19,7 @@ export default function Home() {
       <div className="bg-wrapper bg-pr-black">
         <GymClasses />
       </div>
-      <MissionSection />
+      <FetcherGymMissionsSection></FetcherGymMissionsSection>
       <BenefitsSection />
 
       <div className="gym-features 2xl:grid 2xl:grid-cols-2 3xl:px-24 bg-white">
@@ -26,9 +29,9 @@ export default function Home() {
 
       <GymChooseUsSection />
 
-      <GymClientsSection />
+      <FetcherGymClientsSection />
 
-      <GymCoachesSection />
+      <FetcherGymCoachesSection />
 
       <GymStrongBannerSection />
     </main>
